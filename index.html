@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para: Mi Morxitoo 💌</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Gochi+Hand&display=swap" rel="stylesheet">
+
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+
+        body {
+
+            /* Transición suave para el color de fondo */
+
+            background-color: #e8d5c4;
+
+            transition: background-color 1s ease;
+
+            font-family: 'Gochi Hand', cursive;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+
+        /* Overlay para el oscurecimiento progresivo */
+
+        #darkOverlay {
+
+            position: fixed;
+
+            top: 0; left: 0; width: 100%; height: 100%;
+
+            background-color: black;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            transition: opacity 1s ease;
+
+        }
+
+
+
+        .notebook-page {
+
+            background: #fffef0;
+
+            width: 90%;
+
+            max-width: 500px;
+
+            padding: 40px 20px;
+
+            box-shadow: 15px 15px 0px rgba(0,0,0,0.1);
+
+            border: 2px solid #5d4037;
+
+            position: relative;
+
+            transform: rotate(-1deg);
+
+            z-index: 10;
+
+            transition: all 1s ease;
+
+        }
+
+
+
+        .tape {
+
+            position: absolute;
+
+            width: 120px;
+
+            height: 40px;
+
+            background: rgba(255, 255, 200, 0.5);
+
+            top: -20px; left: 50%;
+
+            transform: translateX(-50%);
+
+            border-left: 3px dotted rgba(0,0,0,0.1);
+
+            border-right: 3px dotted rgba(0,0,0,0.1);
+
+        }
+
+
+
+        h1 {
+
+            font-family: 'Caveat', cursive;
+
+            font-size: 2.5rem;
+
+            color: #8d4c32;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+            transition: color 1s ease;
+
+        }
+
+
+
+        .polaroid {
+
+            background: white;
+
+            padding: 15px 15px 40px 15px;
+
+            border: 1px solid #ddd;
+
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            transform: rotate(2deg);
+
+            margin-bottom: 30px;
+
+        }
+
+
+
+        video { width: 100%; display: block; border: 1px solid #eee; }
+
+
+
+        .btn-container {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+
+        button {
+
+            font-family: 'Gochi Hand', cursive;
+
+            font-size: 1.5rem;
+
+            padding: 10px 30px;
+
+            cursor: pointer;
+
+            border: 2px solid #5d4037;
+
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        }
+
+
+
+        #yesBtn { background: #ff8fab; color: white; }
+
+        #noBtn { background: #f0f0f0; color: #777; }
+
+
+
+        .hidden { display: none !important; }
+
+
+
+        /* Estilo para las caras tristes flotantes */
+
+        .sad-element {
+
+            position: absolute;
+
+            font-size: 2rem;
+
+            pointer-events: none;
+
+            z-index: 5;
+
+            animation: fall 3s linear forwards;
+
+            opacity: 0.7;
+
+        }
+
+
+
+        @keyframes fall {
+
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div id="darkOverlay"></div>
+
+
+
+    <audio id="musicaSi" loop><source src="cancion.mp3.m4a" type="audio/mp3"></audio>
+
+    <audio id="musicaNo"></audio>
+
+
+
+    <div class="notebook-page" id="qScreen">
+
+        <div class="tape"></div>
+
+        <h1 id="mainTitle">¿Quieres ser mi San Valentín?</h1>
+
+       
+
+        <div class="polaroid">
+
+            <video id="v1" autoplay loop muted playsinline>
+
+                <source src="WEBIWABO.mp4" type="video/mp4">
+
+            </video>
+
+        </div>
+
+
+
+        <div class="btn-container">
+
+            <button id="yesBtn">¡SÍ, ACEPTO! ✍️</button>
+
+            <button id="noBtn">No...</button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="notebook-page hidden" id="sScreen">
+
+        <div class="tape" style="background: rgba(255, 182, 193, 0.6);"></div>
+
+        <h1>¡SABÍA QUE SÍ! 💕</h1>
+
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 15px;">Nos vemos el 14 de Febrero, Morxitoo.</p>
+
+       
+
+        <div class="polaroid" style="transform: rotate(-2deg);">
+
+            <video id="v2" loop muted playsinline>
+
+                <source src="snoopyceleb.mp4" type="video/mp4">
+
+            </video>
+
+        </div>
+
+        <p style="text-align: right; color: #8d4c32;">- Atte: L ✍️</p>
+
+    </div>
+
+
+
+    <script>
+
+        const cancionesNo = ['no1.mp3', 'no2.mp3', 'no3.mp', 'no4.mp', 'no5.mp', 'no6.mp'];
+
+        const sadEmojis = ['😢', '💔', '☁️', '🥀', '💧', '🩹'];
+
+       
+
+        const yesBtn = document.getElementById('yesBtn');
+
+        const noBtn = document.getElementById('noBtn');
+
+        const overlay = document.getElementById('darkOverlay');
+
+        const page = document.getElementById('qScreen');
+
+        const title = document.getElementById('mainTitle');
+
+        const audioSi = document.getElementById('musicaSi');
+
+        const audioNo = document.getElementById('musicaNo');
+
+       
+
+        let clicks = 0;
+
+
+
+        function spawnSadness() {
+
+            const emoji = document.createElement('div');
+
+            emoji.className = 'sad-element';
+
+            emoji.innerText = sadEmojis[Math.floor(Math.random() * sadEmojis.length)];
+
+            emoji.style.left = Math.random() * 100 + "vw";
+
+            emoji.style.top = "-50px";
+
+            document.body.appendChild(emoji);
+
+            setTimeout(() => emoji.remove(), 3000);
+
+        }
+
+
+
+        noBtn.addEventListener('click', () => {
+
+            clicks++;
+
+           
+
+            // 1. Música del NO
+
+            if (clicks <= cancionesNo.length) {
+
+                audioNo.src = cancionesNo[clicks - 1];
+
+                audioNo.play().catch(e => console.log("Audio block"));
+
+            }
+
+
+
+            // 2. Efecto de oscurecimiento (Depresivo progresivo)
+
+            const darkness = clicks * 0.16; // Aumenta hasta casi 1 (100% negro)
+
+            overlay.style.opacity = darkness;
+
+           
+
+            if (clicks >= 3) {
+
+                page.style.backgroundColor = "#e0e0e0";
+
+                title.style.color = "#444";
+
+            }
+
+
+
+            // 3. Caras tristes cayendo
+
+            for(let i=0; i<3; i++) {
+
+                setTimeout(spawnSadness, i * 200);
+
+            }
+
+
+
+            // 4. Transformación de botones
+
+            yesBtn.style.transform = `scale(${1 + clicks * 0.4})`;
+
+            noBtn.style.transform = `scale(${1 - clicks * 0.15})`;
+
+           
+
+            const frases = ['¿Segura? 🥺', 'Todo se vuelve oscuro...', 'No me dejes así...', 'Me duele el corazón', 'Ya no veo nada...', 'Adiós mundo cruel...'];
+
+            if(clicks <= frases.length) noBtn.innerText = frases[clicks-1];
+
+
+
+            if(clicks >= 6) {
+
+                noBtn.style.opacity = '0';
+
+                noBtn.style.pointerEvents = 'none';
+
+            }
+
+        });
+
+
+
+        yesBtn.addEventListener('click', () => {
+
+            // Resetear todo al dar click en SÍ
+
+            overlay.style.opacity = "0";
+
+            audioNo.pause();
+
+            audioSi.play();
+
+            document.getElementById('qScreen').classList.add('hidden');
+
+            document.getElementById('sScreen').classList.remove('hidden');
+
+            document.getElementById('v2').play();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
